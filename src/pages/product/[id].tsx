@@ -33,13 +33,15 @@ const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>): void 
     useEffect(() => {
       (async () => {
         try {
-          const result: Product = await getProduct(id || 0);
-          setProduct(result);
+          if(!!id) {
+            const result: Product = await getProduct(id);
+            setProduct(result);
+          }
         } catch (error: ErrorResponse | unknown) {
           console.log(error);
         }
       })()
-    }, []);
+    }, [id]);
 
 
   return (
