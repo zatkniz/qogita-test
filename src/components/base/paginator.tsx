@@ -5,16 +5,33 @@ type Prop = {
 }
 
 const pagination = (props: Prop): JSX.Element => {
+    /**
+     * Returns the first number of the paginated results.
+     * ex: 1 for page 1, 11 for page 11 etc
+     *
+     * Number 20 is the number of results per page.
+     * @returns number
+     */
     const getPageStartNumber = (): number => {
         return props.page * 20 - 19
     }
 
+    /**
+     * Returns the last number of the paginated results.
+     * ex: 20 for page 1, 41 for page 11 etc
+     * 
+     * Number 20 is the number of results per page.
+     * @returns number
+     */
     const getPageEndNumber = (): number => {
         return props.page * 20
     }
 
     const getPageLength = () => {
-
+        /**
+         * Returns the number of pages in the paginated results.
+         * Number 20 is the number of results per page.
+         */
         const pageItems = new Array(props.total / 20).fill(0)
         
         return (

@@ -1,9 +1,7 @@
 import { useCart, Item } from 'react-use-cart';
-import { Product } from '../../../types';
 import CartProductItem from "./product";
 
 const CartItems = () => {
-
     const { items, emptyCart } = useCart();
 
     return (

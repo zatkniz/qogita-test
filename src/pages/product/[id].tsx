@@ -13,6 +13,9 @@ const [quantity, setQuantity] = useState<number>(1);
 
 const { addItem } = useCart();
 
+/**
+ * Adds the product to the cart.
+ */
 const addToCart = (): void => {
   if(product){
     addItem({ 
@@ -24,12 +27,19 @@ const addToCart = (): void => {
   }
 }    
 
+/**
+ * Sets the product quantity of the item.
+ * @param event HTMLInputElement
+ */
 const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setQuantity(Number(event.target.value));        
 }
 
   const { id } = query;
 
+    /**
+     * Fetches the product from the API.
+     */
     useEffect(() => {
       (async () => {
         try {

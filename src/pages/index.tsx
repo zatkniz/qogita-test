@@ -10,10 +10,17 @@ const HomePage = (): JSX.Element => {
   const [page, setPage] = useState<number>(1);
   const [total, setTotal] = useState<number>(0);
 
+  /**
+   * sets the page number.
+   * @param page number
+   */
   const pageChange = (page: number) => {
     setPage(page);
   }
 
+  /**
+   * Fetches the products from the API every time page changes.
+   */
   useEffect(() => {
     (async () => {
       try {

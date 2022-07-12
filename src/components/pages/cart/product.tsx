@@ -1,5 +1,4 @@
 import { useCart, Item } from "react-use-cart";
-import { Product } from "../../../types";
 
 type Props = {
     product: Item;
@@ -7,9 +6,13 @@ type Props = {
 }
 
 const cartProductItem = ({ product }: Props) => {
-
     const { removeItem, updateItemQuantity } = useCart();
 
+    /**
+     * Updates the quantity of the product in the cart.
+     * @param e The event object
+     * @param id 
+     */
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>, id: string): void => {
         updateItemQuantity(id, Number(e.target.value));
     }

@@ -9,11 +9,13 @@ type Props = {
 }
 
 const ProductComponent = ({ product }: Props): JSX.Element => {
-
     const [quantity, setQuantity] = useState<number>(1);
 
     const { addItem } = useCart();
 
+    /**
+     * Adds the product to the cart.
+     */
     const addToCart = (): void => {
         addItem({ 
             id: product.gtin, 
@@ -23,6 +25,10 @@ const ProductComponent = ({ product }: Props): JSX.Element => {
           quantity);
     }    
 
+    /**
+     * Updates the quantity of the product in the cart.
+     * @param event HTMLInputElement
+    */
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         setQuantity(Number(event.target.value));        
     }
