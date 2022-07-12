@@ -10,7 +10,7 @@ export const getProducts = async (page: number): Promise<ProductsResponse> => {
     return data;
 }
 
-export const getProduct = async (id: string | 0 | string[]): Promise<Product> => {    
+export const getProduct = async (id: string | string[]): Promise<Product> => {    
     const { data }: AxiosResponse<Product> = await axios.get(`/api/products/${id}`);
     return data;
 }
