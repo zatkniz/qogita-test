@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Header from './components/header';
 
 type Props = {
   children: React.ReactNode;
@@ -6,22 +6,8 @@ type Props = {
 
 const Layout = ({ children }: Props) => (
   <div className="container mx-auto px-4">
-    <div className="flex justify-between">
-      <strong>Qogita</strong>
-      <nav>
-        <ul className="flex gap-4">
-          <li>
-            <Link href="/">
-              <a className="underline">Products</a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/cart">
-              <a className="underline">Your Cart</a>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+    <div className="mb-2 border-b border-gray-500">
+      <Header />
     </div>
     {children}
   </div>
