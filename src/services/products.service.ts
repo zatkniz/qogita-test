@@ -1,8 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 import { Product, ProductsResponse } from '../types';
 
-export const getProducts = async (): Promise<ProductsResponse> => {    
-    const { data }: AxiosResponse<ProductsResponse> = await axios.get('/api/products');
+export const getProducts = async (page: number): Promise<ProductsResponse> => {    
+    const { data }: AxiosResponse<ProductsResponse> = await axios.get('/api/products', {
+        params: {
+            page
+        }
+    });
     return data;
 }
 
