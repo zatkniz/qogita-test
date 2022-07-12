@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from 'react';
 import { useCart } from "react-use-cart";
+import { Product } from "../types";
 
-const Product = (): JSX.Element => {
+type Props = {
+    product: Product;
+    key: string;
+}
+
+const ProductComponent = ({ product }: Props): JSX.Element => {
 
     const [quantity, setQuantity] = useState<number>(1);
 
@@ -9,15 +15,15 @@ const Product = (): JSX.Element => {
 
     const addToCart = (): void => {
         addItem({ 
-            id: '3', 
-            name: "Kullen",
-            price: 4500,
-            quantity: 1
+            id: product.gtin, 
+            price: product.recommendedRetailPrice,
+            ...product,
+            quantity
           });
-    }
+    }    
 
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        setQuantity(Number(event.target.value));
+        setQuantity(Number(event.target.value));        
     }
 
     return (
@@ -25,19 +31,17 @@ const Product = (): JSX.Element => {
             <div className="flex w-1/3 items-start justify-center sm:w-full">
                 <span>
                     <img 
-                        alt=""
-                        src="https://images.prod.qogita.com/files/images/variants/hTaVvsqVH4MzyKoJgcRTbd.jpg?auto=format&amp;fit=max&amp;w=640"
+                        alt={product.name}
+                        src={product.imageUrl}
                     />
                 </span>
             </div>
             <div className="flex flex-1 flex-col gap-4">
                 <div className="h-full">
                     <a className="group static z-10 before:absolute before:inset-0 before:z-0 before:overflow-hidden before:whitespace-nowrap"
-                        href="/products/5eGTpHjpKY/amigo-ortem-toro-tire-bicycle-tire-28-inch-etrto-40-622-black/?queryID=22262a90c7a64601157188a5d11c9bfa&amp;position=3">
-                        <h2 className="group-hover:text-purple-500">Amigo Ortem Toro Tire - Bicycle Tire 28 Inch - Etrto
-                            40-622
-                            -
-                            Black
+                        href={`/product/${product.gtin}`}>
+                        <h2 className="group-hover:text-purple-500">
+                            {product.name}
                         </h2>
                     </a>
                     <div className="flex -ml-0.5 pt-1">
@@ -90,30 +94,25 @@ const Product = (): JSX.Element => {
                         </div>
                     </div>
                     <div className="flex items-baseline space-x-3 pt-2">
-                        <span className="font-mono text-xl font-bold">€4.13</span>
-                        <div className="text-sm">
-                            <span className="font-mono line-through"
-                                title="Estimated retail price">€11.94</span>
-                            <span className="font-mono" title="Estimated margin percentage">(65%)</span>
-                        </div>
+                        <span className="font-mono text-xl font-bold">€{product.recommendedRetailPrice}</span>
                     </div>
                 </div>
                 <div className="relative z-10">
                     <div className="flex gap-2">
                         <div className="flex-1 rounded border bg-gray-200 text-sm">
-                            <label className="sr-only" htmlFor="quantity-5eGTpHjpKY">Quantity</label><input
+                            <label className="sr-only" htmlFor={`quantity-${product.gtin}`}>Quantity</label><input
                                 name="quantity" className="w-full rounded-t py-2 pl-2 leading-none shadow-inner"
-                                id="quantity-5eGTpHjpKY" type="number" min="1" max="542" value={quantity}
+                                id={`quantity-${product.gtin}`} type="number" min="1" max="542" value={quantity}
                                 onChange={handleQuantityChange} />
-                            <div className="border-t p-1 text-right text-xs leading-none">542 in stock</div>
                         </div>
-                        <button aria-busy="false" type="button"
-                            onClick={() => addToCart()}
-                            className="flex cursor-pointer items-center justify-center gap-1 rounded-lg px-6 py-[0.625rem] font-medium
-                hover:shadow
-                focus:outline focus:outline-2 focus:outline-offset-1 focus:outline-info-400 
-                active:shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] active:outline active:outline-1 active:outline-offset-1 
-                disabled:pointer-events-none disabled:text-black-300 border border-purple-600 bg-transparent text-purple-600 hover:bg-purple-100 focus:bg-purple-100 active:border-purple-800 active:bg-white active:text-purple-800 disabled:border-black-300 px-3">
+                        <button 
+                            type="button"
+                            className="flex cursor-pointer items-center justify-center gap-1 rounded-lg px-6 py-[0.625rem] font-medium hover:shadow
+                                focus:outline focus:outline-2 focus:outline-offset-1 focus:outline-info-400 
+                                active:shadow-[inset_0_4px_4px_rgba(0,0,0,0.25)] active:outline active:outline-1 active:outline-offset-1 
+                                disabled:pointer-events-none disabled:text-black-300 border border-purple-600 bg-transparent text-purple-600 hover:bg-purple-100 focus:bg-purple-100 active:border-purple-800 active:bg-white active:text-purple-800 disabled:border-black-300 px-3"
+                                onClick={() => addToCart()}    
+                            >
                             <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" height="24px"
                                 viewBox="0 0 24 24" width="24px" fill="#FFFFFF" role="img">
                                 <title>Add to cart</title>
@@ -129,4 +128,4 @@ const Product = (): JSX.Element => {
     );
 }
 
-export default Product;
+export default ProductComponent;
