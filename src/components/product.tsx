@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCart } from "react-use-cart";
 import { Product } from "../types";
+import Link from 'next/link';
 
 type Props = {
     product: Product;
@@ -18,8 +19,8 @@ const ProductComponent = ({ product }: Props): JSX.Element => {
             id: product.gtin, 
             price: product.recommendedRetailPrice,
             ...product,
-            quantity
-          });
+          },
+          quantity);
     }    
 
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -38,12 +39,13 @@ const ProductComponent = ({ product }: Props): JSX.Element => {
             </div>
             <div className="flex flex-1 flex-col gap-4">
                 <div className="h-full">
-                    <a className="group static z-10 before:absolute before:inset-0 before:z-0 before:overflow-hidden before:whitespace-nowrap"
-                        href={`/product/${product.gtin}`}>
+                    <Link href={`/product/${product.gtin}`}>
+                    <a className="group static z-10 before:absolute before:inset-0 before:z-0 before:overflow-hidden before:whitespace-nowrap">
                         <h2 className="group-hover:text-purple-500">
                             {product.name}
                         </h2>
                     </a>
+                    </Link>
                     <div className="flex -ml-0.5 pt-1">
                         <div className="mr-2 flex">
                             <div>
