@@ -4,7 +4,7 @@ type Prop = {
     pageChange: (page: number) => void;
 }
 
-const pagination = (props: Prop) => {
+const pagination = (props: Prop): JSX.Element => {
     const getPageStartNumber = (): number => {
         return props.page * 20 - 19
     }
