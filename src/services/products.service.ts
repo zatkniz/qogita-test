@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { Product, ProductsResponse } from '../types';
+import { ProductResponse, ProductsResponse } from '../types';
 
 export const getProducts = async (page: number): Promise<ProductsResponse> => {    
     const { data }: AxiosResponse<ProductsResponse> = await axios.get('/api/products', {
@@ -10,7 +10,7 @@ export const getProducts = async (page: number): Promise<ProductsResponse> => {
     return data;
 }
 
-export const getProduct = async (id: string | string[]): Promise<Product> => {    
-    const { data }: AxiosResponse<Product> = await axios.get(`/api/products/${id}`);
+export const getProduct = async (id: string | string[]): Promise<ProductResponse> => {    
+    const { data }: AxiosResponse<ProductResponse> = await axios.get(`/api/products/${id}`);
     return data;
 }
