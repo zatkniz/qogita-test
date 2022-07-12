@@ -1,5 +1,5 @@
 import Layout from '../../components/Layout';
-import Summary from '../../components/cart/summary';
+import Summary from '../../components/pages/cart/summary';
 import CartItems from '../../components/pages/cart/cartItems';
 import { useCart } from 'react-use-cart';
 
